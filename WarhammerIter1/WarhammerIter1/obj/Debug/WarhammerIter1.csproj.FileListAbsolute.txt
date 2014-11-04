@@ -1,0 +1,9 @@
+c:\users\samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\bin\Debug\WarhammerIter1.exe.config
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\bin\Debug\WarhammerIter1.exe
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\bin\Debug\WarhammerIter1.pdb
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.csprojResolveAssemblyReference.cache
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.Form1.resources
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.Properties.Resources.resources
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.csproj.GenerateResource.Cache
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.exe
+C:\Users\Samurai\documents\visual studio 2013\Projects\WarhammerIter1\WarhammerIter1\obj\Debug\WarhammerIter1.pdb
