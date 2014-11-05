@@ -8,6 +8,7 @@
 
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System;
 
 public abstract class BasicModel {
 
@@ -27,19 +28,43 @@ public abstract class BasicModel {
     protected int x, y;
 
 
+    public virtual int  GetToughnes(Unit Surce)
+    {
+        return 4;
+    }
+
 	public BasicModel()
     {
 	}
 
     public virtual List<Wound> Shoot(int t)
     {
+        Random r=new Random(100);
         List<Wound> L = new List<Wound> {};
         List<int> dice;
         L.AddRange(Weapons[0].Shoot(Moved));
-        int n = L.Capacity;
+        int n = L.Count;
         dice = new DiceGenerator().manyD6(n);
-        TextBox Box = new TextBox();
-        MessageBox.Show("");
+        char a=' ';
+        string dices = new string(a, 1);
+        foreach(int d in dice )
+        {
+            char c = (char)('0' + d);
+            dices  += c;
+            dices += " ";
+        }
+        //TextBox Box = new TextBox();
+        MessageBox.Show(dices);
+        for (int i = 0; i < n;i++ )
+        {
+            if(dice[i]<7-BalisticSkill)
+            {
+                //L.Remove(L[r.Next() % L.Count]);
+                L[i].fail();
+            }
+        }
+        if(L.Count!=0)
+            L[0].deleteFail(L);
         return L;
     }
 

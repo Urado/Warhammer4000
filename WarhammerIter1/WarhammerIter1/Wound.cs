@@ -7,20 +7,73 @@
 ///////////////////////////////////////////////////////////
 
 
+using System.Collections.Generic;
 
-
-public class Wound {
+public class Wound 
+{
 
 	private int ap = 7;
-	private Effect[] Efects;
+	private Effect[] Effects;
     private Effect m_Effect;
 	private int Strenght;
+    private int faled=0;
+
+    public void deleteFail(List<Wound> L)
+    {
+        List<Wound> Fail = new List<Wound> { };
+        foreach(Wound l in L)
+        {
+            if(l.IsFaled()==1)
+            {
+                Fail.Add(l);
+            }
+        }
+        foreach(Wound f in Fail)
+        {
+            L.Remove(f);
+        }
+    }
+
+    public int IsFaled()
+    {
+        return faled;
+    }
+
+    public void fail()
+    {
+        faled = 1;
+    }
+
+    public void win()
+    {
+        faled = 0;
+    }
+
+    public int GetStrenght()
+    {
+        return Strenght;
+    }
+
+    public int GetAP()
+    {
+        return ap;
+    }
+
+    public Effect[] GetEffects()
+    {
+        return Effects;
+    }
+
+    public Effect Getm_Effect()
+    {
+        return m_Effect;
+    }
 
 	public Wound(int S,int AP,Effect[] Ef)
     {
         ap = AP;
         Strenght=S;
-        Efects=Ef;
+        Effects=Ef;
 	}
 
 	~Wound(){

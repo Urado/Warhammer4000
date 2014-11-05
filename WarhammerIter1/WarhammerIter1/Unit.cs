@@ -41,7 +41,29 @@ public class Unit
     }
     public void Wonding(Unit Sourse,List<Wound> Wounds)
     {
-
+        DiceGenerator d = new DiceGenerator();
+        int n = Wounds.Count;
+        int t=0,Majority=0;
+        List<int> dices = d.manyD6(n);
+        foreach(BasicModel m in Models)
+        {
+            t++;
+            Majority += m.GetToughnes(Sourse);
+        }
+        Majority = Majority / t;
+        for (int i = 0; i < n;i++)
+        {
+            if((Wounds[i].GetStrenght() - Majority + 4)>dices[i])
+            {
+                Wounds[i].fail();
+            }
+            if((Wounds[i].GetStrenght()- Majority +4 ) == 7 && dices[i]==6)
+            {
+                Wounds[i].win();
+            }
+        }
+        if (Wounds.Count != 0)
+            Wounds[0].deleteFail(Wounds);
     }
 
 	~Unit()
