@@ -11,7 +11,14 @@ using System;
 
 
 public class DiceGenerator
-{
+{       
+    Random r=new Random();
+
+    public int rand(int a,int b)
+    {
+        return (r.Next() % (b - a + 1 )) + a;
+    }
+
 	public DiceGenerator(){
 
 	}
@@ -36,7 +43,7 @@ public class DiceGenerator
 
 	public int D6()
     {
-        Random r=new Random();
+
         return r.Next()%6+1;
 	}
 
