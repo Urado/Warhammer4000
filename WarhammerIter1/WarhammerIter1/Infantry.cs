@@ -5,9 +5,10 @@
 //  Created on:      04-ноя-2014 12:01:10
 //  Original author: Samurai
 ///////////////////////////////////////////////////////////
-
-
-
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System;
+using System.Drawing;
 
 public class Infantry : BasicModel {
 
@@ -17,6 +18,7 @@ public class Infantry : BasicModel {
 
 	public Infantry()
     {
+        x = y = 100;
         BalisticSkill = 3;
         WeaponSkill = 3;
         Strength = 3;
@@ -30,13 +32,33 @@ public class Infantry : BasicModel {
             w.w_BasicModel = this;
         }
 	}
+
+    public int Save(Wound x, int dice,int Cover)
+    {
+        int ASave = ArmorSave;
+        if (x.GetAP() <= ASave)
+            ASave = 7;
+        ASave = Math.Max(ASave, Math.Max(Cover, InvulnerableSave));
+        if(ASave>dice)
+        {
+            Wound--;
+        }
+        if (Wound <= 0)
+        {
+            Alive = 1;
+            return 1;
+        }
+        return 0;
+    }
+
 	~Infantry(){
 
 	}
 
-	public override void Paint()
+	public override void Paint(PaintEventArgs e)
     {
-
+        if(Alive==0)
+            e.Graphics.FillEllipse(new SolidBrush(Color.DarkRed), x-50, y-50, x+50, y+50);
 	}
 
 }//end Infantry

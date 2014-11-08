@@ -6,17 +6,20 @@
 //  Original author: Samurai
 ///////////////////////////////////////////////////////////
 
-
+using System.Collections.Generic;
+using System.Windows.Forms;
+using System;
 
 
 public class Map {
 
-	private Unit[] AllUnits;
+	private List<Unit> AllUnits;
 	private Point Coord;
-	private Object MapObjects;
+	private List<Object> MapObjects;
 
-	public Map(){
-
+	public Map(List<Unit> Units)
+    {
+        AllUnits = Units;
 	}
 
 	~Map(){
@@ -34,8 +37,12 @@ public class Map {
 		return null;
 	}
 
-	public void Paint(){
-
+	public void Paint(PaintEventArgs e)
+    {
+        foreach(Unit U in AllUnits)
+        {
+            U.Paint(e);
+        }
 	}
 
 }//end Map

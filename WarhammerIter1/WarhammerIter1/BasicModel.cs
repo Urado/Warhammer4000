@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
+using System.Drawing;
 
 public abstract class BasicModel {
 
@@ -25,7 +26,17 @@ public abstract class BasicModel {
     public Unit w_Unit;
 	protected int WeaponSkill;
 	protected int Wound;
-    protected int x, y;
+    public int x, y;
+
+    public int Save(Wound x, int dice,int Cover)
+    {
+        return 0;
+    }
+
+    public int IsAlive()
+    {
+        return Alive;
+    }
 
 
     public virtual int  GetToughnes(Unit Surce)
@@ -37,14 +48,13 @@ public abstract class BasicModel {
     {
 	}
 
-    public virtual List<Wound> Shoot(int t)
+    public virtual List<Wound> Shoot(int t,DiceGenerator DiceGen)
     {
-        Random r=new Random(100);
         List<Wound> L = new List<Wound> {};
         List<int> dice;
         L.AddRange(Weapons[0].Shoot(Moved));
         int n = L.Count;
-        dice = new DiceGenerator().manyD6(n);
+        dice = DiceGen.manyD6(n);
         char a=' ';
         string dices = new string(a, 1);
         foreach(int d in dice )
@@ -73,6 +83,6 @@ public abstract class BasicModel {
 
 	}
 
-    public abstract void Paint();
+    public abstract void Paint(PaintEventArgs e);
 
 }//end BasicModel

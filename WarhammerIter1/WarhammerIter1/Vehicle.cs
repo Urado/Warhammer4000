@@ -6,7 +6,8 @@
 //  Original author: Samurai
 ///////////////////////////////////////////////////////////
 
-
+using System;
+using System.Windows.Forms;
 
 
 public class Vehicle : BasicModel {
@@ -23,7 +24,7 @@ public class Vehicle : BasicModel {
 
 	}
 
-    public override void Paint()
+    public override void Paint(PaintEventArgs e)
     {
         
     }

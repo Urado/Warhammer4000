@@ -13,7 +13,7 @@ public enum Pfase
     Move,
     Shoot,
     Charge,
-
+    End
 }
 
 public class Game 
@@ -22,13 +22,18 @@ public class Game
 	private int NowPlayer;
     private Pfase NowPhase;
 	private Player[] Players;
+    public Map IsMap;
+    public MapInterfeise IsMapInter = new MapInterfeise();
+    public MiniMap IsMiniMap = new MiniMap();
 	private int Turn;
     public Unit Target;
     public Unit Sourse;
-
+    private DiceGenerator DiceGen;
 
 	public Game()
     {
+        List<Unit> LUnit = new List<Unit> {};
+        DiceGen = new DiceGenerator();
         Players = new Player[2];
         Players[0] = new Player();
         Players[1] = new Player();
@@ -36,7 +41,13 @@ public class Game
         NowPhase = Pfase.Shoot;
         Turn = 1;
         Sourse = Players[0].PlayersUnit[0];
+        Sourse.m_BasicModel.y = 500;
         Target = Players[1].PlayersUnit[0];
+        foreach(Player p in Players)
+        {
+            LUnit.AddRange(p.GetUnits());
+        }
+        IsMap = new Map(LUnit);
 	}
 
 	~Game()
@@ -50,9 +61,11 @@ public class Game
 	/// <param name="Sourse"></param>
 	public int Shooting(Unit Target, int WeaponTyper, Unit Sourse)
     {
+        int Cover = 7;
         List<Wound> L = new List<Wound> { };
-        L = Sourse.Shoot(Target,0);
-        Target.Wonding(Sourse,L);
+        L = Sourse.Shoot(Target,0,DiceGen);
+        L = Target.Wonding(Sourse, L, DiceGen);
+        Target.Save(Cover, Sourse,L, DiceGen);
 		return 0;
 	}
 
@@ -60,7 +73,8 @@ public class Game
 	/// <param name="Target"></param>
 	/// <param name="Shots"></param>
 	/// <param name="HowManyShot"></param>
-	public void Wounding(Unit Target, Wound[] Shots, int HowManyShot){
+	public void Wounding(Unit Target, Wound[] Shots, int HowManyShot)
+    {
 
 	}
 
