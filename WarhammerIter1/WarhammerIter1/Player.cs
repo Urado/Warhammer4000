@@ -35,7 +35,8 @@ public class Player {
         }
 	}
 
-	~Player(){
+	~Player()
+    {
 
 	}
 
