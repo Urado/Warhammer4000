@@ -30,6 +30,11 @@ public class Game
     public Unit Sourse;
     private DiceGenerator DiceGen;
 
+    public Player PlayerNow()
+    {
+        return Players[NowPlayer];
+    }
+
 	public Game()
     {
         List<Unit> LUnit = new List<Unit> {};

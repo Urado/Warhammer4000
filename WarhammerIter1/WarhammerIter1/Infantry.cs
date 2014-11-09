@@ -23,7 +23,7 @@ public class Infantry : BasicModel {
         WeaponSkill = 3;
         Strength = 3;
         Toughnes = 3;
-        ArmorSave = 2;
+        ArmorSave = 5;
         Weapons = new Weapon[1];
         Weapons[0] = new Weapon();
         m_Weapons = Weapons[0];
@@ -33,12 +33,12 @@ public class Infantry : BasicModel {
         }
 	}
 
-    public int Save(Wound x, int dice,int Cover)
+    public override int Save(Wound x, int dice,int Cover)
     {
         int ASave = ArmorSave;
         if (x.GetAP() <= ASave)
             ASave = 7;
-        ASave = Math.Max(ASave, Math.Max(Cover, InvulnerableSave));
+        ASave = Math.Min(ASave, Math.Min(Cover, InvulnerableSave));
         if(ASave>dice)
         {
             Wound--;
@@ -51,14 +51,20 @@ public class Infantry : BasicModel {
         return 0;
     }
 
-	~Infantry(){
+	~Infantry()
+    {
 
 	}
 
-	public override void Paint(PaintEventArgs e)
+	public override void Paint(PaintEventArgs e,Player now)
     {
+        SolidBrush B;
+        if (w_Unit.w_Player == now)
+            B = new SolidBrush(Color.Snow);
+        else
+            B = new SolidBrush(Color.DarkRed);
         if(Alive==0)
-            e.Graphics.FillEllipse(new SolidBrush(Color.DarkRed), x-50, y-50, x+50, y+50);
+            e.Graphics.FillEllipse(B, x-50, y-50, 100, 100);
 	}
 
 }//end Infantry

@@ -37,11 +37,11 @@ public class Map {
 		return null;
 	}
 
-	public void Paint(PaintEventArgs e)
+	public void Paint(PaintEventArgs e,Player now)
     {
         foreach(Unit U in AllUnits)
         {
-            U.Paint(e);
+            U.Paint(e,now);
         }
 	}
 

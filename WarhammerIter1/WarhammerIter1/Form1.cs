@@ -27,12 +27,13 @@ namespace WarhammerIter1
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Green);
-            IsGame.IsMap.Paint(e);
+            IsGame.IsMap.Paint(e,IsGame.PlayerNow());
         }
 
         private void tableLayoutPanel7_Click(object sender, EventArgs e)
         {
             IsGame.Shooting(IsGame.Target, 0, IsGame.Sourse);
+            tableLayoutPanel1.Invalidate();
         }
     }
 }

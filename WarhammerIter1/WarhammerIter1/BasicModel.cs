@@ -28,7 +28,7 @@ public abstract class BasicModel {
 	protected int Wound;
     public int x, y;
 
-    public int Save(Wound x, int dice,int Cover)
+    virtual public int Save(Wound x, int dice,int Cover)
     {
         return 0;
     }
@@ -46,6 +46,7 @@ public abstract class BasicModel {
 
 	public BasicModel()
     {
+        Wound = 1;
 	}
 
     public virtual List<Wound> Shoot(int t,DiceGenerator DiceGen)
@@ -83,6 +84,6 @@ public abstract class BasicModel {
 
 	}
 
-    public abstract void Paint(PaintEventArgs e);
+    public abstract void Paint(PaintEventArgs e,Player now);
 
 }//end BasicModel

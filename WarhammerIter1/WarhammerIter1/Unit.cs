@@ -22,7 +22,7 @@ public class Unit
 	public Unit()
     {
         Models = new BasicModel[1];
-        Models[0] = (BasicModel)new Infantry();
+        Models[0] = new Infantry();
         m_BasicModel = Models[0];
         foreach(BasicModel w in Models)
         {
@@ -30,11 +30,11 @@ public class Unit
         }
 	}
 
-    public void Paint(PaintEventArgs e)
+    public void Paint(PaintEventArgs e,Player now)
     {
         foreach(BasicModel B in Models)
         {
-            B.Paint(e);
+            B.Paint(e,now);
         }
     }
 
@@ -85,12 +85,10 @@ public class Unit
 
     public BasicModel Furst(Unit Sourse)
     {
-        for(int i=0;Models[i]!=m_BasicModel;i++)
+        foreach (BasicModel m in Models)
         {
-            if(Models[i].IsAlive()==0)
-            {
-                return Models[i];
-            }
+            if (m.IsAlive() == 0)
+                return m;
         }
         return null;
     }
@@ -114,7 +112,11 @@ public class Unit
         {
             BasicModel m = Furst(Sourse);
             if (m == null)
+            {
+                MessageBox.Show("All dead");
                 break;
+            }
+
             m.Save(Wounds[i], dices[i], Cover);
         }
     }
