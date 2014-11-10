@@ -32,7 +32,19 @@ namespace WarhammerIter1
 
         private void tableLayoutPanel7_Click(object sender, EventArgs e)
         {
-            IsGame.Shooting(IsGame.Target, 0, IsGame.Sourse);
+            if(IsGame.IsNowPfase(Pfase.Shoot))
+                IsGame.Shooting(IsGame.Target, 0, IsGame.Sourse);
+            tableLayoutPanel1.Invalidate();
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel3_MouseClick(object sender, MouseEventArgs e)
+        {
+            IsGame.NextPfase();
             tableLayoutPanel1.Invalidate();
         }
     }

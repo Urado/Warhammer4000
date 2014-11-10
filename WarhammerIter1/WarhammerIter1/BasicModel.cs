@@ -28,6 +28,32 @@ public abstract class BasicModel {
 	protected int Wound;
     public int x, y;
 
+    public void BeginPfase(Pfase NowPfase, Player NowPlayer)
+    {
+        switch (NowPfase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+                break;
+        }
+    }
+
+    public void EndPfase(Pfase NowPfase,Player NowPlayer)
+    {
+        switch (NowPfase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+                break;
+        }
+    }
+
     virtual public int Save(Wound x, int dice,int Cover)
     {
         return 0;

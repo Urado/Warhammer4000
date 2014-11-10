@@ -15,9 +15,46 @@ public class Unit
 	private int Alive = 0;
 	private Effect[] Effects;
 	public BasicModel[] Models;
+    private int IsShoot=0;
 	public BasicModel m_BasicModel;
 	public Effect m_Effect;
     public Player w_Player;
+
+    public void BeginPfase(Pfase NowPfase, Player NowPlayer)
+    {
+        foreach (BasicModel b in Models)
+        {
+            b.EndPfase(NowPfase, NowPlayer);
+        }
+        switch (NowPfase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+                break;
+        }
+    }
+
+    public void EndPfase(Pfase NowPfase, Player NowPlayer)
+    {
+
+        foreach (BasicModel b in Models)
+        {
+            b.EndPfase(NowPfase, NowPlayer);
+        }
+        switch (NowPfase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+                IsShoot = 0;
+                break;
+        }
+    }
 
 	public Unit()
     {
@@ -41,9 +78,18 @@ public class Unit
     public List<Wound> Shoot(Unit Target, int type, DiceGenerator d)
     {
         List<Wound> L=new List<Wound>{};
-        foreach(BasicModel ShootModel in Models)
+        if (IsShoot == 0)
         {
-            L.AddRange(ShootModel.Shoot(type,d));
+            IsShoot = 1;
+            foreach (BasicModel ShootModel in Models)
+            {
+                L.AddRange(ShootModel.Shoot(type, d));
+            }
+        }
+        else
+        {
+            MessageBox.Show("Уже стрелял");
+            return null;
         }
         return L;
     }

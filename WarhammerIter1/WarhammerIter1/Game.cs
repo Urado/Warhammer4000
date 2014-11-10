@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////
 
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 public enum Pfase
 {
@@ -29,6 +30,84 @@ public class Game
     public Unit Target;
     public Unit Sourse;
     private DiceGenerator DiceGen;
+
+    public  bool IsNowPfase(Pfase p)
+    {
+        if (p == NowPhase)
+            return true;
+        return false;
+    }
+
+    private void EndPfase()
+    {
+        foreach (Player p in Players)
+        {
+            foreach (Unit U in p.PlayersUnit)
+            {
+                U.EndPfase(NowPhase, Players[NowPlayer]);
+            }
+        }
+        switch(NowPhase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+
+                break;
+        }
+    }
+
+    private void BeginPfase()
+    {
+        foreach (Player p in Players)
+        {
+            foreach (Unit U in p.PlayersUnit)
+            {
+                U.EndPfase(NowPhase, Players[NowPlayer]);
+            }
+        }
+        switch (NowPhase)
+        {
+            case Pfase.Move:
+                break;
+            case Pfase.Shoot:
+                break;
+            case Pfase.Charge:
+                break;
+        }
+    }
+
+    public void NextPfase()
+    {
+        EndPfase();
+        NowPhase++;
+
+        if(NowPhase==Pfase.End)
+        {
+            NowPhase = Pfase.Move;
+            NowPlayer++;
+            Unit p=Target;
+            Target = Sourse;
+            Sourse = p;
+            if(NowPlayer==2)
+            {
+                NowPlayer = 0;
+                Turn++;
+                MessageBox.Show("Новый ход");
+            }
+            else
+            {
+                MessageBox.Show("Следующий игрок");
+            }
+        }
+        else
+        {
+            MessageBox.Show("Новая фаза");
+        }
+        BeginPfase();
+    }
 
     public Player PlayerNow()
     {
@@ -69,7 +148,11 @@ public class Game
         int Cover = 7;
         List<Wound> L = new List<Wound> { };
         L = Sourse.Shoot(Target,0,DiceGen);
+        if (L == null)
+            return 0;
         L = Target.Wonding(Sourse, L, DiceGen);
+        if (L == null)
+            return 0;
         Target.Save(Cover, Sourse,L, DiceGen);
 		return 0;
 	}
