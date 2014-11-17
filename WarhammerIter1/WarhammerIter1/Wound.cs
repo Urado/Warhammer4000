@@ -12,11 +12,37 @@ using System.Collections.Generic;
 public class Wound 
 {
 
-	private int ap = 7;
-	private Effect[] Effects;
-    private Effect m_Effect;
-	private int Strenght;
+	public int ap   
+    {
+        get;
+        private set;
+    }
+	public Effect[] Effects
+    {
+        get;
+        private set;
+    }
+    public Effect m_Effect
+    {
+        get;
+        private set;
+    }
+	public int Strenght
+    {
+        get;
+        private set;
+    }
     private int faled=0;
+    public BasicModel Sourse
+    {
+        get;
+        private set;
+    }
+    public int BalisticSkills
+    {
+        get;
+        private set;
+    }
 
     public void deleteFail(List<Wound> L)
     {
@@ -48,7 +74,7 @@ public class Wound
     {
         faled = 0;
     }
-
+    /*
     public int GetStrenght()
     {
         return Strenght;
@@ -59,6 +85,11 @@ public class Wound
         return ap;
     }
 
+    /*public int GetBallisticSkills()
+    {
+        return BalisticSkills;
+    }
+
     public Effect[] GetEffects()
     {
         return Effects;
@@ -67,13 +98,15 @@ public class Wound
     public Effect Getm_Effect()
     {
         return m_Effect;
-    }
+    }*/
 
-	public Wound(int S,int AP,Effect[] Ef)
+	public Wound(int S,int AP,Effect[] Ef,int bs,BasicModel Sor)
     {
         ap = AP;
         Strenght=S;
         Effects=Ef;
+        BalisticSkills=bs;
+        Sourse=Sor;
 	}
 
 	~Wound(){

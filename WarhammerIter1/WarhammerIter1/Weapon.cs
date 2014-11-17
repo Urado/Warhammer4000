@@ -34,12 +34,12 @@ public class Weapon {
         Shoots = 2;
 	}
 
-    public virtual List<Wound> Shoot(int moved)
+    public virtual List<Wound> Shoot(int moved,int bs)
     {
         List<Wound> L = new List<Wound> { };
         for (int i=0; i<Shoots;i++ )
         {
-            L.Add(new Wound(Strenght, ArmorPenetretion, new Effect[0]));
+            L.Add(new Wound(Strenght, ArmorPenetretion, new Effect[0],bs,w_BasicModel));
         }
         return L;
     }

@@ -77,32 +77,14 @@ public abstract class BasicModel {
 
     public virtual List<Wound> Shoot(int t,DiceGenerator DiceGen)
     {
-        List<Wound> L = new List<Wound> {};
-        List<int> dice;
-        L.AddRange(Weapons[0].Shoot(Moved));
-        int n = L.Count;
-        dice = DiceGen.manyD6(n);
-        char a=' ';
-        string dices = new string(a, 1);
-        foreach(int d in dice )
+        if (Alive == 0)
         {
-            char c = (char)('0' + d);
-            dices  += c;
-            dices += " ";
+            List<Wound> L = new List<Wound> { };
+            L.AddRange(Weapons[0].Shoot(Moved,BalisticSkill));
+            return L;
         }
-        //TextBox Box = new TextBox();
-        MessageBox.Show(dices);
-        for (int i = 0; i < n;i++ )
-        {
-            if(dice[i]<7-BalisticSkill)
-            {
-                //L.Remove(L[r.Next() % L.Count]);
-                L[i].fail();
-            }
-        }
-        if(L.Count!=0)
-            L[0].deleteFail(L);
-        return L;
+        else
+            return null;
     }
 
 	~BasicModel()

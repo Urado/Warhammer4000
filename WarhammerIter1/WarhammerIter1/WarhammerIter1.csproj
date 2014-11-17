@@ -59,6 +59,7 @@
     <Compile Include="Map.cs" />
     <Compile Include="MapInterfeise.cs" />
     <Compile Include="MiniMap.cs" />
+    <Compile Include="Mission.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Point.cs" />

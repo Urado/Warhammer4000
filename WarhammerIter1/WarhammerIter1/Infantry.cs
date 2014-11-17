@@ -10,7 +10,8 @@ using System.Windows.Forms;
 using System;
 using System.Drawing;
 
-public class Infantry : BasicModel {
+public class Infantry : BasicModel 
+{
 
 	private int ArmorSave = 7;
 	private int Leadership;
@@ -36,7 +37,7 @@ public class Infantry : BasicModel {
     public override int Save(Wound x, int dice,int Cover)
     {
         int ASave = ArmorSave;
-        if (x.GetAP() <= ASave)
+        if (x.ap <= ASave)
             ASave = 7;
         ASave = Math.Min(ASave, Math.Min(Cover, InvulnerableSave));
         if(ASave>dice)

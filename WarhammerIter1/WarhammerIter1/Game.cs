@@ -71,10 +71,13 @@ public class Game
         switch (NowPhase)
         {
             case Pfase.Move:
+                MessageBox.Show("Фаза движения");
                 break;
             case Pfase.Shoot:
+                MessageBox.Show("Фаза стрельбы");
                 break;
             case Pfase.Charge:
+                MessageBox.Show("Фаза атаки");
                 break;
         }
     }
@@ -94,6 +97,25 @@ public class Game
             if(NowPlayer==2)
             {
                 NowPlayer = 0;
+
+                if(Turn==5)
+                {
+                    if(DiceGen.D6()<=4)
+                    {
+                        MessageBox.Show("Конец игры");
+                    }
+                }
+                if (Turn == 6)
+                {
+                    if (DiceGen.D6() <= 5)
+                    {
+                        MessageBox.Show("Конец игры");
+                    }
+                }
+                if (Turn == 7)
+                {
+                    MessageBox.Show("Конец игры");
+                } 
                 Turn++;
                 MessageBox.Show("Новый ход");
             }
@@ -104,7 +126,7 @@ public class Game
         }
         else
         {
-            MessageBox.Show("Новая фаза");
+            //MessageBox.Show("Новая фаза");
         }
         BeginPfase();
     }
@@ -125,7 +147,8 @@ public class Game
         NowPhase = Pfase.Shoot;
         Turn = 1;
         Sourse = Players[0].PlayersUnit[0];
-        Sourse.m_BasicModel.y = 500;
+        Sourse.Models[0].x += 300;
+        Sourse.Models[1].x += 300;
         Target = Players[1].PlayersUnit[0];
         foreach(Player p in Players)
         {

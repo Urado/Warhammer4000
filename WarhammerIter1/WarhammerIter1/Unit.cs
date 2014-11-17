@@ -58,9 +58,14 @@ public class Unit
 
 	public Unit()
     {
-        Models = new BasicModel[1];
+        Models = new BasicModel[2];
         Models[0] = new Infantry();
-        m_BasicModel = Models[0];
+        Models[1] = new Infantry();
+        Models[0].x = 200;
+        Models[0].y = 200;
+        Models[1].x = 100;
+        Models[1].y = 100;
+        m_BasicModel = Models[1];
         foreach(BasicModel w in Models)
         {
             w.w_Unit=this;
@@ -77,14 +82,38 @@ public class Unit
 
     public List<Wound> Shoot(Unit Target, int type, DiceGenerator d)
     {
-        List<Wound> L=new List<Wound>{};
+        List<Wound> L=new List<Wound>{},Lp;
         if (IsShoot == 0)
         {
             IsShoot = 1;
             foreach (BasicModel ShootModel in Models)
             {
-                L.AddRange(ShootModel.Shoot(type, d));
+                Lp = ShootModel.Shoot(type, d);
+                if(Lp!=null)
+                    L.AddRange(Lp);
             }
+            int n = L.Count;
+            List<int> dice = d.manyD6(n);
+            char a = ' ';
+            string dices = new string(a, 1);
+            foreach (int di in dice)
+            {
+                char c = (char)('0' + di);
+                dices += c;
+                dices += " ";
+            }
+            //TextBox Box = new TextBox();
+            MessageBox.Show(dices);
+            for (int i = 0; i < n; i++)
+            {
+                if (dice[i] < 7 - L[i].BalisticSkills)
+                {
+                    //L.Remove(L[r.Next() % L.Count]);
+                    L[i].fail();
+                }
+            }
+            if (L.Count != 0)
+                L[0].deleteFail(L);
         }
         else
         {
@@ -117,9 +146,9 @@ public class Unit
         Majority = Majority / t;
         for (int i = 0; i < n;i++)
         {
-            if((Wounds[i].GetStrenght() - Majority + 4)>dices[i])
+            if((Wounds[i].Strenght - Majority + 4)>dices[i])
                 Wounds[i].fail();
-            if((Wounds[i].GetStrenght()- Majority +4 ) == 7 && dices[i]==6)
+            if((Wounds[i].Strenght- Majority +4 ) == 7 && dices[i]==6)
                 Wounds[i].win();
             if (dices[i] == 1)
                 Wounds[i].fail();
